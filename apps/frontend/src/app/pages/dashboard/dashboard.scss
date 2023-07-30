@@ -1,0 +1,47 @@
+.dashboard-page {
+  display: grid;
+  grid-template-areas: 
+  "aside head"
+  "aside main"
+  "footer footer";
+  grid-template-columns: 300px 1fr;
+  grid-template-rows: 120px 1fr 30px;
+  padding: 20px 20px 0 20px;
+  & .header {
+    grid-area: head;
+    background-color: rgba(255, 255, 255, .8);
+    border: 1px solid #ccc;
+  }
+
+  & .aside {
+    grid-area: aside;
+    padding: 20px;
+    background-color: rgba(15, 26, 52, .9);
+    color: #fff;
+  }
+
+  & .main {
+    grid-area: main;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, .8);
+  }
+
+  & .footer {
+    grid-area: footer;
+  }
+}
+
+.dashboard-logo {
+  max-width: 100%;
+  border: 1px solid rgba(204, 204, 204, 0.2);
+  padding: 10px;
+  & img {
+    max-width: 160px;
+  }
+
+  & h2 {
+    text-align: right;
+    margin: 0;
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,56 @@
+@import "../../../variables";
+
+.preview {
+  width: 100vw;
+  height: 100vh;
+  background: $gradient;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+
+  .login {
+    background: #31D822;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 245px;
+    height: 44px;
+    color: #FFF;
+    padding: 5px 14px;
+    border-radius: 100px;
+    cursor: pointer;
+    margin: 40px;
+    transform: translate(0%);
+    transition: box-shadow 0.2s ease;
+    &:hover {
+      box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+      transition: box-shadow 0.2s ease;
+    }
+  }
+
+  & .billy {
+    & img {
+      transform: translateY(100%);
+    }
+  }
+
+  & .preview-logo {
+    overflow: hidden;
+    padding: 0 40px;
+    transform: translateY(100%);
+    & img {
+      transform: translate(-200%);
+    }
+    & h2 {
+      margin: 0;
+      padding: 0;
+      text-align: end;
+      font-size: 30px;
+      color: #FFF;
+      transform: translate(300%);
+    }
+  }
+}

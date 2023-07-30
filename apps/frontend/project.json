@@ -19,7 +19,8 @@
         "styles": ["apps/frontend/src/styles.scss"],
         "scripts": [],
         "isolatedConfig": true,
-        "webpackConfig": "apps/frontend/webpack.config.js"
+        "webpackConfig": "apps/frontend/webpack.config.js",
+        "generatePackageJson": true
       },
       "configurations": {
         "development": {
@@ -49,7 +50,8 @@
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "frontend:build",
-        "hmr": true
+        "hmr": true,
+        "proxyConfig": "apps/frontend/proxy.conf.json"
       },
       "configurations": {
         "development": {
@@ -86,6 +88,15 @@
           "ci": true,
           "codeCoverage": true
         }
+      }
+    },
+    "buildImage": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx run frontend:build",
+          "docker build --file ./apps/frontend/Dockerfile --tag adaptation.frontend:latest ."
+        ]
       }
     }
   },

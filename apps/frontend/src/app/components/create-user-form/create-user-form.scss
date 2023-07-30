@@ -1,0 +1,11 @@
+
+.create-user-form__left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  & img {
+    width: 100%;
+  }
+}

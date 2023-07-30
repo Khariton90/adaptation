@@ -1,0 +1,15 @@
+
+POST http://localhost:3333/api/users/create-user HTTP/1.1
+Content-Type: application/json
+
+{
+    "firstname": "Хап",
+    "lastname": "Хап",
+    "avatar": "https://avatars.mds.yandex.net/get-yapic/0/0-0/islands-middle",
+    "email": "663@mail.ru",
+    "jobTitle": "manager",
+    "status": 100,
+    "startDate": "2011-10-05T14:48:00.000Z"
+}
+
+###
