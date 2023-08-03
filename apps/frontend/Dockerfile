@@ -1,10 +1,5 @@
-FROM node:18.12-alpine as builder
+FROM node:18.12-alpine
 WORKDIR /opt/adaptation-frontend
-COPY ./dist/apps/frontend/package.json .
-RUN npm install --only=prod --omit=dev
 COPY ./dist/apps/frontend .
-RUN npm run build
-FROM nginx:1.16.0-alpine
-COPY --from=build /app/build /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+RUN npm install
+CMD ["npm", "run", "start", "frontend"]
