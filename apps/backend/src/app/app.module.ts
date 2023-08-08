@@ -7,7 +7,6 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { getMongoDbConfig } from './config/mongodb.config';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
-import { ChatModule } from './chat/chat.module';
 import envSchema from './env.schema';
 import databaseConfig from './config/database.config';
 
@@ -21,10 +20,8 @@ import databaseConfig from './config/database.config';
       load: [databaseConfig],
     }),
     MongooseModule.forRootAsync(getMongoDbConfig()),
-    ChatModule,
     UsersModule,
     AuthModule,
-    ChatModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -157,7 +157,7 @@ export function Dashboard(): JSX.Element {
               <Link to={AppRoute.CreateUser}>Новый пользователь</Link>
             </li>
             <li className="dashboard-item">
-              <Link to={AppRoute.Chat}>Чат</Link>
+              Чат
             </li>
           </ul>
         </nav>

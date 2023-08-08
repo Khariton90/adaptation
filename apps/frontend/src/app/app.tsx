@@ -23,7 +23,7 @@ export function App() {
         <Route path={AppRoute.Dash} element={<Dashboard />} />
         <Route path={AppRoute.CreateUser} element={<CreateUser />} />
         <Route path={AppRoute.Login} element={<LoginPage />} />
-        <Route path={AppRoute.Chat} element={<ChatPage />}/>
+        {/* <Route path={AppRoute.Chat} element={<ChatPage />}/> */}
       </Routes>
     </div>
   );
