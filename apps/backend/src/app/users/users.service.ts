@@ -19,7 +19,7 @@ export class UsersService {
     const user = {
       firstname,
       lastname,
-      avatar:  avatar ? `http://localhost:3333/api/users/avatar/${avatar}` : `http://localhost:3333/api/users/avatar/default-avatar.svg`,
+      avatar:  avatar ? `http://31.184.253.16:3333/api/users/avatar/${avatar}` : `http://31.184.253.16:3333/api/users/avatar/default-avatar.svg`,
       email,
       jobTitle,
       userRole: UserRole.User,
