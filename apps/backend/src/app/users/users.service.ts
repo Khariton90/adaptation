@@ -7,6 +7,8 @@ import { UsersEntity } from "./users.entity";
 import { CLIENT_URL } from "../app.constant";
 import { generatePassword } from "@org/core";
 
+const DEFAULT_URL_AVATAR = "http://31.184.253.16:3333/api/users/avatar/default-avatar.svg";
+
 @Injectable()
 export class UsersService {
   constructor(
@@ -35,7 +37,7 @@ export class UsersService {
     const user = {
       firstname,
       lastname,
-      avatar:  avatar ? `${CLIENT_URL}api/users/avatar/${avatar}` : `${CLIENT_URL}api/users/avatar/default-avatar.svg`,
+      avatar:  avatar ? `http://31.184.253.16:3333/api/users/avatar/${avatar}` : DEFAULT_URL_AVATAR,
       email,
       jobTitle,
       userRole: UserRole.User,
