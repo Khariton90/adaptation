@@ -48,7 +48,7 @@ export class UsersController {
     }
   }))
   async uploadImage(@UploadedFile() file: File) {
-    const response = `${"http://localhost:3333/api/users/avatar/"}${file.filename}`
+    const response = `${"http://31.184.253.16:3333/api/users/avatar/"}${file.filename}`
     return response;
   }
 }
