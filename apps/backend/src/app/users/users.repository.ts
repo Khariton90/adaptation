@@ -13,20 +13,20 @@ export class UsersRepository implements CRUDRepository<UsersEntity, string, User
   ) {}
 
   public async find(): Promise<User[] | []> {
-    return await this.usersModel.find().sort({createdAt: 'desc'}).exec();
+    return this.usersModel.find().sort({createdAt: 'desc'}).exec();
   }
   
   public async findByEmail(email: string): Promise<User> {
-    return await this.usersModel.findOne({email});
+    return this.usersModel.findOne({email});
   }
   
   public async findById(id: string): Promise<User> {
-    throw new Error("Method not implemented.");
+    return this.usersModel.findById(id);
   }
   
   public async create(item: UsersEntity): Promise<User> {
     const newUser = new this.usersModel(item);
-    return await newUser.save();
+    return newUser.save();
   }
   
   public async update(id: string, item: UsersEntity): Promise<User> {
@@ -34,7 +34,7 @@ export class UsersRepository implements CRUDRepository<UsersEntity, string, User
   }
   
   public async destroy(id: string): Promise<void> {
-    throw new Error("Method not implemented.");
+    this.usersModel.findByIdAndDelete(id).exec();
   }
   
 }

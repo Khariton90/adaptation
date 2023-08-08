@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { UsersService } from "./users.service";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { fillObject } from "@org/core";
@@ -6,9 +6,14 @@ import { UserRdo } from "./rdo/user.rdo";
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Express } from 'express';
 import { diskStorage } from 'multer';
+import { CLIENT_URL } from "../app.constant";
+import { randomUUID } from "crypto";
+import { ApiTags } from "@nestjs/swagger";
+import { CheckMongoidValidationPipe } from "../pipes/check-mongo-id-validation.pipe";
 
 type File = Express.Multer.File;
 
+@ApiTags('The «Users»')
 @Controller('users')
 export class UsersController {
   constructor(
@@ -27,16 +32,30 @@ export class UsersController {
     return fillObject(UserRdo, user);
   }
 
+  @Get('/:id')
+  public async getUser(@Param('id', CheckMongoidValidationPipe) id: string) {
+    const user = await this.usersService.findById(id);
+    return fillObject(UserRdo, user);
+  }
+
+  @Delete('/delete/:id')
+  public async deleteUser(@Param('id', CheckMongoidValidationPipe) id: string) {
+    return await this.usersService.deleteUser(id);
+  }
+
   @Get('avatar/:filename')
   public async getAvatar(@Param('filename') filename: string, @Res() res) {
-    res.sendFile(filename, { root: './apps/public' });
+    res.sendFile(filename, { root: './apps/backend/src/assets' });
   }
+
   @Post('upload')
   @UseInterceptors(FileInterceptor('file', {
     storage: diskStorage({
-      destination: './apps/public',
+      destination: './apps/backend/src/assets',
       filename: (req, file, cb) => {
-        cb(null, file.originalname);
+        const fileExtention = file.originalname.split('.')[1];
+        const newFileName = `${randomUUID()}.${fileExtention}`
+        cb(null, newFileName);
       }
     }),
     fileFilter: (req, file, cb) => {
@@ -48,7 +67,7 @@ export class UsersController {
     }
   }))
   async uploadImage(@UploadedFile() file: File) {
-    const response = `${"http://31.184.253.16:3333/api/users/avatar/"}${file.filename}`
+    const response = `${CLIENT_URL}"api/users/avatar/"${file.filename}`
     return response;
   }
 }

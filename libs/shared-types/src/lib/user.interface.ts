@@ -11,4 +11,5 @@ export interface User {
   jobTitle: JobTitle;
   status: number;
   startDate: string;
+  password: string;
 }

@@ -13,6 +13,7 @@ export class UsersEntity implements User {
   jobTitle: JobTitle;
   status: number;
   startDate: string;
+  password: string;
 
   constructor(user: User) {
     this.fillEntity(user);
@@ -28,6 +29,7 @@ export class UsersEntity implements User {
     this.jobTitle = user.jobTitle;
     this.status = user.status;
     this.startDate = user.startDate;
+    this.password = user.password;
   }
 
   public toObject() {

@@ -5,6 +5,7 @@ export enum AppRoute {
   Login = '/login',
   Dash = '/dashboard',
   CreateUser = '/dashboard/create-user',
+  Chat = '/chat',
   NotFound = '*',
 }
 

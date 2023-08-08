@@ -54,6 +54,11 @@ export class UsersModel extends Document implements User {
     required: true
   })
   public startDate: string;
+
+  @Prop({
+    required: true
+  })
+  public password: string;
 }
 
 export const UsersSchema = SchemaFactory.createForClass(UsersModel);

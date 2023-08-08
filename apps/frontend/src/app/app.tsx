@@ -7,6 +7,7 @@ import { Dashboard } from "./pages/dashboard/dashboard";
 import { CreateUser } from "./pages/create-user/create-user";
 import { LoginPage } from "./pages/login-page/login-page";
 import { HomePage } from "./pages/home-page/home-page";
+import { ChatPage } from "./pages/chat-page/chat-page";
 
 export function App() {
   const [loaded, setLoaded] = useState(false);
@@ -22,6 +23,7 @@ export function App() {
         <Route path={AppRoute.Dash} element={<Dashboard />} />
         <Route path={AppRoute.CreateUser} element={<CreateUser />} />
         <Route path={AppRoute.Login} element={<LoginPage />} />
+        <Route path={AppRoute.Chat} element={<ChatPage />}/>
       </Routes>
     </div>
   );
