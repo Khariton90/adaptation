@@ -48,7 +48,7 @@ services:
       - 3333:3333
     networks:
       - adaptation.backend.network
-
+  
 networks:
   adaptation.backend.network:
     driver: bridge

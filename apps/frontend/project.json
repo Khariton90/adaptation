@@ -51,7 +51,8 @@
       "options": {
         "buildTarget": "frontend:build",
         "hmr": true,
-        "proxyConfig": "apps/frontend/proxy.conf.json"
+        "proxyConfig": "apps/frontend/proxy.conf.json",
+        "port": 8080
       },
       "configurations": {
         "development": {

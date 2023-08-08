@@ -30,13 +30,14 @@ const columns: GridColDef[] = [
     valueGetter: (params: GridValueGetterParams) =>
       `${params.row.firstname || ''} ${params.row.lastname || ''}`,
   },
-  { field: 'jobTitle', headerName: 'Должность', width: 140,
-  renderCell: (params) => {
-    return (
-      <div>{jobTitleList[params.value as JobTitle]}</div>
-    );
-  }
-},
+  {
+    field: 'jobTitle', headerName: 'Должность', width: 140,
+    renderCell: (params) => {
+      return (
+        <div>{jobTitleList[params.value as JobTitle]}</div>
+      );
+    }
+  },
   { field: 'email', headerName: 'E-mail', width: 200 },
   {
     field: 'teacher', headerName: 'Наставник', width: 200,
@@ -88,10 +89,14 @@ const rows = [
 ];
 
 const fetchJson = async (url: string) => {
-  const response = await fetch(url);
-  return response.json();
+  try {
+    const response = await fetch(url);
+    return response.json();
+  } catch (err) {
+    console.log(err);
+    return []
+  }
 };
-
 
 export function Dashboard(): JSX.Element {
   const [loaded, setLoaded] = useState(false);

@@ -8,8 +8,8 @@ async function bootstrap() {
   app.setGlobalPrefix(globalPrefix);
   app.useGlobalPipes(new ValidationPipe({transform: true}));
   app.enableCors({
-    origin: "https://7mcn4c.csb.app",
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    origin: "http://chinatruckspb.ru",
+    methods: ['GET', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
     credentials: true,
 });
 
