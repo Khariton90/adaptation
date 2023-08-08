@@ -45,13 +45,13 @@ export class UsersController {
 
   @Get('avatar/:filename')
   public async getAvatar(@Param('filename') filename: string, @Res() res) {
-    res.sendFile(filename, { root: './apps/backend/src/assets' });
+    res.sendFile(filename, { root: './assets' });
   }
 
   @Post('upload')
   @UseInterceptors(FileInterceptor('file', {
     storage: diskStorage({
-      destination: './apps/backend/src/assets',
+      destination: './assets',
       filename: (req, file, cb) => {
         const fileExtention = file.originalname.split('.')[1];
         const newFileName = `${randomUUID()}.${fileExtention}`
@@ -67,7 +67,7 @@ export class UsersController {
     }
   }))
   async uploadImage(@UploadedFile() file: File) {
-    const response = `${CLIENT_URL}"api/users/avatar/"${file.filename}`
+    const response = `${CLIENT_URL}"/api/users/avatar/"${file.filename}`
     return response;
   }
 }
