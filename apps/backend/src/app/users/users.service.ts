@@ -37,7 +37,7 @@ export class UsersService {
     const user = {
       firstname,
       lastname,
-      avatar:  avatar ? `http://31.184.253.16:3333/api/users/avatar/${avatar}` : DEFAULT_URL_AVATAR,
+      avatar:  avatar ? avatar : DEFAULT_URL_AVATAR,
       email,
       jobTitle,
       userRole: UserRole.User,
@@ -61,3 +61,4 @@ export class UsersService {
     return await this.usersRepository.destroy(id);
   }
 }
+
