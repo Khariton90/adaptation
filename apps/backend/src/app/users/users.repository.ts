@@ -10,31 +10,31 @@ import { Model } from "mongoose";
 export class UsersRepository implements CRUDRepository<UsersEntity, string, User> {
   constructor(
     @InjectModel(UsersModel.name) private readonly usersModel: Model<UsersModel>,
-  ) {}
+  ) { }
 
   public async find(): Promise<User[] | []> {
-    return this.usersModel.find().sort({createdAt: 'desc'}).exec();
+    return this.usersModel.find().sort({ createdAt: 'desc' }).exec();
   }
-  
+
   public async findByEmail(email: string): Promise<User> {
-    return this.usersModel.findOne({email});
+    return this.usersModel.findOne({ email });
   }
-  
+
   public async findById(id: string): Promise<User> {
     return this.usersModel.findById(id);
   }
-  
+
   public async create(item: UsersEntity): Promise<User> {
     const newUser = new this.usersModel(item);
     return newUser.save();
   }
-  
+
   public async update(id: string, item: UsersEntity): Promise<User> {
-    throw new Error("Method not implemented.");
+    return await this.usersModel.findByIdAndUpdate(id, item, { new: true }).exec();
   }
-  
+
   public async destroy(id: string): Promise<void> {
     this.usersModel.findByIdAndDelete(id).exec();
   }
-  
+
 }

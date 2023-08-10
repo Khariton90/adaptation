@@ -1,5 +1,5 @@
 import { JobTitle, User, UserRole } from "@org/shared-types";
-// import { compare, genSalt, hash } from 'bcrypt';
+import { compare, genSalt, hash } from 'bcrypt';
 
 export const SALT_ROUNDS = 10;
 
@@ -19,6 +19,20 @@ export class UsersEntity implements User {
     this.fillEntity(user);
   }
 
+  public async setPassword(password: string): Promise<UsersEntity> {
+    const salt = await genSalt(SALT_ROUNDS);
+    this.password = await hash(password, salt);
+    return this;
+  }
+
+  public async comparePassword(password: string): Promise<boolean> {
+    return compare(password, this.password);
+  }
+
+  public toObject() {
+    return {...this};
+  }
+
   public fillEntity(user: User) {
     this._id = user._id;
     this.firstname = user.firstname;
@@ -31,18 +45,4 @@ export class UsersEntity implements User {
     this.startDate = user.startDate;
     this.password = user.password;
   }
-
-  public toObject() {
-    return {...this};
-  }
-
-  // public async setPassword(password: string): Promise<UsersEntity> {
-  //   const salt = await genSalt(SALT_ROUNDS);
-  //   this.passwordHash = await hash(password, salt);
-  //   return this;
-  // }
-
-  // public async comparePassword(password: string): Promise<boolean> {
-  //   return compare(password, this.passwordHash);
-  // }
 }

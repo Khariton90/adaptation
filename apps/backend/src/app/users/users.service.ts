@@ -4,7 +4,6 @@ import { UsersRepository } from "./users.repository";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UserRole } from "@org/shared-types";
 import { UsersEntity } from "./users.entity";
-import { CLIENT_URL } from "../app.constant";
 import { generatePassword } from "@org/core";
 
 const DEFAULT_URL_AVATAR = "http://31.184.253.16:3333/api/users/avatar/default-avatar.svg";
@@ -52,7 +51,7 @@ export class UsersService {
       throw new BadRequestException(`User with this email ${email} already exists`)
     }
 
-    const userEntity = new UsersEntity(user);
+    const userEntity = await new UsersEntity(user).setPassword(user.password);
     const newUser = await this.usersRepository.create(userEntity);
     return newUser;
   }

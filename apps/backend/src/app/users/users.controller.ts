@@ -1,4 +1,5 @@
-import { Body, Controller, Delete, Get, Param, Post, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { CheckMongoidValidationPipe } from "./../pipes/check-mongo-id-validation.pipe";
+import { Body, Controller, Delete, Get, Param, Post, Put, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { UsersService } from "./users.service";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { fillObject } from "@org/core";
@@ -7,9 +8,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { Express } from 'express';
 import { diskStorage } from 'multer';
 import { CLIENT_URL } from "../app.constant";
-import { randomUUID } from "crypto";
 import { ApiTags } from "@nestjs/swagger";
-import { CheckMongoidValidationPipe } from "../pipes/check-mongo-id-validation.pipe";
 
 type File = Express.Multer.File;
 
@@ -53,9 +52,7 @@ export class UsersController {
     storage: diskStorage({
       destination: './assets',
       filename: (req, file, cb) => {
-        const fileExtention = file.originalname.split('.')[1];
-        const newFileName = `${randomUUID()}.${fileExtention}`
-        cb(null, newFileName);
+        cb(null, file.originalname);
       }
     }),
     fileFilter: (req, file, cb) => {
