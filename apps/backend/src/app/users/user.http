@@ -14,7 +14,7 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:3333/api/users/64d26c5eb3782174cbadfcb6 HTTP/1.1
+GET http://localhost:3333/api/users/64d61425912a275376b5929c HTTP/1.1
 Content-Type: application/json
 
 ###

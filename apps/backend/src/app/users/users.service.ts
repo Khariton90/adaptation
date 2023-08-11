@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { UsersRepository } from "./users.repository";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UserRole } from "@org/shared-types";
@@ -33,6 +33,8 @@ export class UsersService {
   }
 
   public async create({firstname, lastname, email, jobTitle, startDate, avatar}: CreateUserDto) {
+    const password = generatePassword();
+
     const user = {
       firstname,
       lastname,
@@ -42,7 +44,7 @@ export class UsersService {
       userRole: UserRole.User,
       status: 1,
       startDate: dayjs(startDate).toISOString(),
-      password: generatePassword(),
+      password: password,
     }
 
     const existUser = await this.usersRepository.findByEmail(email);
@@ -53,6 +55,7 @@ export class UsersService {
 
     const userEntity = await new UsersEntity(user).setPassword(user.password);
     const newUser = await this.usersRepository.create(userEntity);
+    Logger.log(`email: ${email} password: ${password}`);
     return newUser;
   }
 
