@@ -1,5 +1,5 @@
 import { CheckMongoidValidationPipe } from "./../pipes/check-mongo-id-validation.pipe";
-import { Body, Controller, Delete, Get, Param, Post, Put, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { UsersService } from "./users.service";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { fillObject } from "@org/core";
@@ -64,7 +64,7 @@ export class UsersController {
     }
   }))
   async uploadImage(@UploadedFile() file: File) {
-    const response = `${CLIENT_URL}"/api/users/avatar/"${file.filename}`
+    const response = `${CLIENT_URL}/api/users/avatar/${file.filename}`
     return response;
   }
 }
