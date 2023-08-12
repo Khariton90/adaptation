@@ -1,17 +1,20 @@
 import dayjs from "dayjs";
-import { BadRequestException, Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { UsersRepository } from "./users.repository";
 import { CreateUserDto } from "./dto/create-user.dto";
-import { UserRole } from "@org/shared-types";
+import { CommandEvent, UserRole } from "@org/shared-types";
 import { UsersEntity } from "./users.entity";
-import { generatePassword } from "@org/core";
+import { createEvent, generatePassword } from "@org/core";
+import { RABBITMQ_SERVICE } from "../app.constant";
+import { ClientProxy } from "@nestjs/microservices";
 
 const DEFAULT_URL_AVATAR = "http://31.184.253.16:3333/api/users/avatar/default-avatar.svg";
 
 @Injectable()
 export class UsersService {
   constructor(
-    private readonly usersRepository: UsersRepository
+    private readonly usersRepository: UsersRepository,
+    @Inject(RABBITMQ_SERVICE) private readonly rabbitClient: ClientProxy,
   ) {}
 
   public async find() {
@@ -55,6 +58,15 @@ export class UsersService {
 
     const userEntity = await new UsersEntity(user).setPassword(user.password);
     const newUser = await this.usersRepository.create(userEntity);
+
+    this.rabbitClient.emit(
+      createEvent(CommandEvent.AddSubscriber), {
+        id: newUser._id,
+        email: newUser.email,
+        firstname: newUser.firstname,
+        password: password
+      }
+    )
     Logger.log(`email: ${email} password: ${password}`);
     return newUser;
   }

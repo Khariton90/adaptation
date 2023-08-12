@@ -1,27 +1,25 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ENV_FILE_PATH } from './app.constant';
-import { MongooseModule } from '@nestjs/mongoose';
-import { getMongoDbConfig, mongoDbOptions } from './config/mongodb.config';
-import { UsersModule } from './users/users.module';
-import { AuthModule } from './auth/auth.module';
-import envSchema from './env.schema';
+import { EmailSubscriberModule } from './email-subscriber/email-subscriber.module';
+import { ConfigModule } from "@nestjs/config";
 import { rabbitMqOptions } from "./config/rabbitmq.config";
+import { getMongoDbConfig, mongoDbOptions } from "./config/mongodb.config";
+import { MongooseModule } from "@nestjs/mongoose";
+import envSchema from "./env.schema";
+import { NOTIFY_SERVICE_ENV_PATH } from "./app.constant";
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       cache: true,
       isGlobal: true,
-      envFilePath: ENV_FILE_PATH,
+      envFilePath: NOTIFY_SERVICE_ENV_PATH,
       validationSchema: envSchema,
-      load: [mongoDbOptions, rabbitMqOptions],
+      load: [rabbitMqOptions, mongoDbOptions]
     }),
     MongooseModule.forRootAsync(getMongoDbConfig()),
-    UsersModule,
-    AuthModule,
+    EmailSubscriberModule
   ],
   controllers: [AppController],
   providers: [AppService],

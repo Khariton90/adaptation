@@ -1,3 +1,4 @@
+import { CommandEvent } from "@org/shared-types";
 import { plainToInstance, ClassConstructor } from 'class-transformer';
 
 export function fillObject<T, V>(someDto: ClassConstructor<T>, plainObject: V) {
@@ -10,8 +11,12 @@ export function generatePassword() {
   let retVal = "";
 
   for (let i = 0, n = charset.length; i < length; ++i) {
-      retVal += charset.charAt(Math.floor(Math.random() * n));
+    retVal += charset.charAt(Math.floor(Math.random() * n));
   }
-  
+
   return retVal;
+}
+
+export function createEvent(commandEvent: CommandEvent) {
+  return { cmd: commandEvent };
 }

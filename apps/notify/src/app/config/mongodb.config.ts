@@ -11,7 +11,7 @@ export const mongoDbOptions = registerAs('database', () => ({
   port: parseInt(process.env.MONGO_PORT, 10),
   user: process.env.MONGO_USER,
   password: process.env.MONGO_PASSWORD,
-  authBase: process.env.MONGO_DB_BASE,
+  authDatabase: process.env.MONGO_DB_BASE,
 }));
 
 export function getMongoDbConfig(): MongooseModuleAsyncOptions {
@@ -23,7 +23,7 @@ export function getMongoDbConfig(): MongooseModuleAsyncOptions {
         host: configService.get('database.host'),
         port: configService.get('database.port'),
         databaseName: configService.get('database.name'),
-        authDatabase: configService.get('database.authBase'),
+        authDatabase: configService.get('database.authDatabase'),
       });
 
       return {

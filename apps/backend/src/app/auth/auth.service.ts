@@ -7,7 +7,7 @@ import { UsersEntity } from "../users/users.entity";
 export class AuthService {
   constructor(
     private usersService: UsersService,
-    private jwtService: JwtService
+    private jwtService: JwtService,
   ) { }
 
   async signIn(email: string, pass: string) {
