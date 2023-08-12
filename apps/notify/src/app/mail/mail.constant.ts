@@ -1,0 +1,1 @@
+export const EMAIL_ADD_SUBSCRIBER_SUBJECT = 'Оформлена подписка на учебный портал «Петрович Адаптация»';
