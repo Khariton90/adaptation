@@ -25,7 +25,7 @@ export function getMongoDbConfig(): MongooseModuleAsyncOptions {
         databaseName: configService.get('database.name'),
         authDatabase: configService.get('database.authDatabase'),
       });
-
+      console.log(uri);
       return {
         uri: uri
       }

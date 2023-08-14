@@ -3,7 +3,7 @@ POST http://localhost:3333/api/users/create-user HTTP/1.1
 Content-Type: application/json
 
 {
-    "firstname": "Evgeniy",
+    "firstname": "Евгений",
     "lastname": "Evgeniy",
     "avatar": "https://avatars.mds.yandex.net/get-yapic/0/0-0/islands-middle",
     "email": "chinatruckspb@gmail.com",

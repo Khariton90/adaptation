@@ -14,14 +14,6 @@ services:
       timeout: 5s
       retries: 5
 
-  # fakesmtp:
-  #   image: gessnerfl/fake-smtp-server
-  #   container_name: "fakesmtp"
-  #   hostname: "fakesmtp"
-  #   ports:
-  #     - "5025:5025"
-  #     - "1081:5080"
-
   mongodb:
     image: mongo
     restart: always
